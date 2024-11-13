@@ -26,3 +26,8 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: 'Login failed' });
     }
 };
+
+exports.logout = async (req, res) => {
+    // Send a success message for the frontend to handle token removal
+    res.json({ message: 'Logged out successfully' });
+};

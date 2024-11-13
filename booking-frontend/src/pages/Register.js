@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function Register() {
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -11,10 +11,10 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/register', {
-                name,
-                email,
-                password
+            const response = await axios.post('http://localhost:5000/api/users/register', {
+                username,
+                password,
+                role: 'student'
             });
             setMessage(response.data.message);
             // Redirect user to login or dashboard page if registration is successful
@@ -29,8 +29,8 @@ function Register() {
             <form onSubmit={handleRegister}>
                 <input
                     type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     placeholder="Full Name"
                 />
                 <input

@@ -9,12 +9,19 @@ function Dashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Check if token is present in localStorage
+        const token = localStorage.getItem('token');
+        // if (!token) {
+        //     navigate('/login');
+        //     return;
+        // }
+
         // Fetch bookings from the backend after login
         const fetchBookings = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/bookings', {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                        Authorization: `Bearer ${token}`
                     }
                 });
                 setBookings(response.data);
@@ -24,7 +31,7 @@ function Dashboard() {
         };
 
         fetchBookings();
-    }, []);
+    }, [navigate]);
 
     return (
         <div>
